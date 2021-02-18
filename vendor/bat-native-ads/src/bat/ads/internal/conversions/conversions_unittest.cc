@@ -499,7 +499,8 @@ TEST_F(BatAdsConversionsTest, ConvertAdForRedirectChainIntermediateUrl) {
 
   // Act
   conversions_->MaybeConvert(
-      {"https://foo.com/bar", "https://foo.com/baz", "https://foo.com/qux"}, "");
+      {"https://foo.com/bar", "https://foo.com/baz", "https://foo.com/qux"},
+      "");
 
   // Assert
   const std::string condition = base::StringPrintf(
@@ -537,7 +538,8 @@ TEST_F(BatAdsConversionsTest, ConvertAdForRedirectChainOriginalUrl) {
 
   // Act
   conversions_->MaybeConvert(
-      {"https://foo.com/bar", "https://foo.com/baz", "https://foo.com/qux"}, "");
+      {"https://foo.com/bar", "https://foo.com/baz", "https://foo.com/qux"},
+      "");
 
   // Assert
   const std::string condition = base::StringPrintf(
@@ -575,7 +577,8 @@ TEST_F(BatAdsConversionsTest, ConvertAdForRedirectChainUrl) {
 
   // Act
   conversions_->MaybeConvert(
-      {"https://foo.com/bar", "https://foo.com/baz", "https://foo.com/qux"}, "");
+      {"https://foo.com/bar", "https://foo.com/baz", "https://foo.com/qux"},
+      "");
 
   // Assert
   const std::string condition = base::StringPrintf(
@@ -595,6 +598,7 @@ TEST_F(BatAdsConversionsTest, ConvertAdForRedirectChainUrl) {
 }
 
 // TODO(Moritz Haller): create test with verifiable conversion id
-// const std::string html = "<html><head><meta name=\"ad-conversion-id\" content=\"smartbrownfoxes42\"></head></html>";
+// const std::string html = "<html><head><meta name=\"ad-conversion-id\"
+// content=\"smartbrownfoxes42\"></head></html>";
 
 }  // namespace ads

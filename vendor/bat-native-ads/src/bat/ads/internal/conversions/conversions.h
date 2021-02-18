@@ -62,8 +62,9 @@ class Conversions {
       const ConversionList& conversions);
   ConversionList SortConversions(const ConversionList& conversions);
 
-  void AddItemToQueue(const AdEventInfo& ad_event,
-                      const security::VerifiableConversionEnvelopeInfo& envelope);
+  void AddItemToQueue(
+      const AdEventInfo& ad_event,
+      const security::VerifiableConversionEnvelopeInfo& envelope);
   bool RemoveItemFromQueue(const std::string& creative_instance_id);
   void ProcessQueueItem(const ConversionQueueItemInfo& queue_item);
   void ProcessQueue();
