@@ -57,7 +57,8 @@ std::vector<std::string> CreateConfirmationUrlRequestBuilder::BuildHeaders()
 }
 
 std::string CreateConfirmationUrlRequestBuilder::BuildBody() const {
-  return CreateConfirmationRequestDTO(confirmation_);
+  base::Value user_data(base::Value::Type::DICTIONARY);
+  return CreateConfirmationRequestDTO(confirmation_, user_data);
 }
 
 }  // namespace ads

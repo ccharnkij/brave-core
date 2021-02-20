@@ -48,7 +48,12 @@ void RedeemUnblindedToken::Redeem(const ConfirmationInfo& confirmation) {
   BLOG(1, "Redeem unblinded token");
 
   if (!confirmation.created) {
+    // confirmation_dto_user_data_builder.cc
+    // BuildConfirmationDTOUserData(confirmation, [=](base::Value user_data) {
+    //   FooBar(confirmation, user_data);
+    // });
     CreateConfirmation(confirmation);
+
     return;
   }
 
@@ -57,12 +62,50 @@ void RedeemUnblindedToken::Redeem(const ConfirmationInfo& confirmation) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+// void RedeemUnblindedToken::FooBar(
+//     const ConfirmationInfo& confirmation, base::Value user_data) {
+  // base::Value user_data(base::Value::Type::DICTIONARY);
+  // TODO(Moritz Haller): maybe in file, but ticket to break out and use
+  // builder pattern
+//   if (confirmation.type != ConfirmationType::kConversion) {
+//     CreateConfirmation(confirmation, user_data);
+//     return;
+//   }
+
+//   // TODO(Moritz Haller): Get conversion envelope from DB - need to inject?
+//   database::table::ConversionQueue conversion_queue_database_table;
+//   conversion_queue_database_table.GetByCreativeInstanceId([=](const Result result,
+//       const ConversionQueueItem& conversion_queue_item) {
+//     if (result != SUCCESS) {
+//       BLOG(1, "Failed to get conversion queue item with creative instance id " << ...);
+//       return;
+//     }
+
+//     if (!conversion_queue_item.envelope.IsValid()) {
+//       CreateConfirmation(confirmation, user_data);
+//       return;
+//     }
+
+//       // TODO(Moritz Haller): break out into confirmation_conversion_dto_user_data.cc as free function GetUserData and return dict
+//     base::Value envelope(base::Value::Type::DICTIONARY);
+//     envelope.SetKey("alg", base::Value("alg_placeholder"));
+//     envelope.SetKey("ciphertext", base::Value("ciphertext_placeholder"));
+//     envelope.SetKey("epk", base::Value("epk_placeholder"));
+//     envelope.SetKey("nonce", base::Value("nonce_placeholder"));
+//     user_data.SetKey("envelope", std::move(envelope));
+
+//     CreateConfirmation(confirmation, user_data);
+//   });
+// }
+
+// void CreateConfirmation(confirmation, user_data) {
 void RedeemUnblindedToken::CreateConfirmation(
     const ConfirmationInfo& confirmation) {
   BLOG(1, "CreateConfirmation");
   BLOG(2, "POST /v1/confirmation/{confirmation_id}/{credential}");
 
   CreateConfirmationUrlRequestBuilder url_request_builder(confirmation);
+  // CreateConfirmationUrlRequestBuilder url_request_builder(confirmation, user_data);
   UrlRequestPtr url_request = url_request_builder.Build();
   BLOG(5, UrlRequestToString(url_request));
   BLOG(7, UrlRequestHeadersToString(url_request));
